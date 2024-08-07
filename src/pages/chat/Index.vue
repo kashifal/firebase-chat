@@ -14,9 +14,9 @@ const messageList = computed(() => {
 
 const message = ref("");
 const input = ref(null);
+const bottom = ref(null);
 
 onMounted(() => {
-  console.log(messages.value, "..");
   input.value.focus();
 });
 
@@ -25,17 +25,20 @@ function send() {
   message.value = "";
   nextTick(() => {
     input.value.focus();
+    scrollToBottom();
   });
 }
 
-const bottom = ref(null);
+function scrollToBottom() {
+  nextTick(() => {
+    bottom.value.scrollIntoView({ behavior: "smooth" });
+  });
+}
 
 watch(
   messages,
   () => {
-    nextTick(() => {
-      bottom.value.scrollIntoView({ behavior: "smooth" });
-    });
+    scrollToBottom();
   },
   { deep: true }
 );
