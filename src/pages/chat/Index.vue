@@ -8,7 +8,7 @@ const { messages, sendMessage } = useChat();
 
 const messageList = computed(() => {
   return messages.value.slice().sort((a, b) => {
-    return new Date(a.createdAt) - new Date(b.createdAt);
+    return new Date(b.createdAt) - new Date(a.createdAt);
   });
 });
 
@@ -18,6 +18,7 @@ const bottom = ref(null);
 
 onMounted(() => {
   input.value.focus();
+  scrollToBottom();
 });
 
 function send() {
