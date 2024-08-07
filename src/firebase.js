@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GithubAuthProvider,
+  GoogleAuthProvider,
   onAuthStateChanged,
   signInAnonymously,
   signInWithPopup,
@@ -56,6 +57,19 @@ export function useAuth() {
       });
   };
 
+  const loginWithGoogle = async () => {
+    const googleProvider = new GoogleAuthProvider();
+    await signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        user.value = result.user;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   const loginAnonymously = async () => {
     await signInAnonymously(auth)
       .then(() => {
@@ -76,7 +90,7 @@ export function useAuth() {
       });
   };
 
-  return { user, isLogin, login, logOut, loginAnonymously };
+  return { user, isLogin, login, loginWithGoogle, logOut, loginAnonymously };
 }
 
 const messageQuery = query(
