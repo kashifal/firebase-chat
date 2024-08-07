@@ -69,7 +69,7 @@ watch(
                 class="input-text rounded rounded-r-none"
                 @keyup.enter="send"
               />
-              <button @click="send" class="btn btn-info rounded-l-none">
+              <button @click="send" class="btn bg-emerald-700 rounded-l-none">
                 Send
               </button>
             </div>
@@ -84,7 +84,7 @@ watch(
       <span class="text-gray-500"
         >Owner
         <a
-          href="https://afsakar.dev"
+          href="https://kashifsulehria.com/"
           target="_blank"
           class="text-blue-500 font-bold"
           >Kashif Sulehria</a

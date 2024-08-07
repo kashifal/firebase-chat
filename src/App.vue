@@ -20,10 +20,7 @@ const { isLogin } = useAuth();
       >
         <span class="text-gray-500"
           >Owner
-          <a
-            href="https://afsakar.dev"
-            target="_blank"
-            class="text-blue-500 font-bold"
+          <a href="https://kashifsulehria.com/" class="text-blue-500 font-bold"
             >Kashif Sulehria</a
           ></span
         >
