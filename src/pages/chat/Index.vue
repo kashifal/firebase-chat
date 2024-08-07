@@ -16,6 +16,7 @@ const message = ref("");
 const input = ref(null);
 
 onMounted(() => {
+  console.log(messages.value, "..");
   input.value.focus();
 });
 
@@ -60,7 +61,6 @@ watch(
             />
             <div ref="bottom"></div>
           </div>
-
           <div class="sticky bottom-0 left-0 w-full px-2 py-3 bg-blue-200">
             <div class="flex items-center justify-between">
               <input
@@ -77,19 +77,19 @@ watch(
         </div>
       </div>
     </div>
-
     <div
       class="bg-transparent w-full h-10 flex items-center justify-center mt-5"
     >
-      <span class="text-gray-500"
-        >Owner
+      <span class="text-gray-500">
+        Owner
         <a
           href="https://kashifsulehria.com/"
           target="_blank"
           class="text-blue-500 font-bold"
-          >Kashif Sulehria</a
-        ></span
-      >
+        >
+          Kashif Sulehria
+        </a>
+      </span>
     </div>
   </div>
 </template>

@@ -10,9 +10,7 @@ import {
 import {
   addDoc,
   collection,
-  getDocs,
   getFirestore,
-  limit,
   orderBy,
   query,
   onSnapshot,
@@ -21,7 +19,7 @@ import Filter from "bad-words";
 
 import { computed, onUnmounted, ref } from "vue";
 
-const firebase = initializeApp({
+const firebaseConfig = {
   apiKey: "AIzaSyDSrh9IbpIjDDii8p0xIUMwGx71S7O-3To",
   authDomain: "probspace-5615e.firebaseapp.com",
   projectId: "probspace-5615e",
@@ -30,10 +28,11 @@ const firebase = initializeApp({
   appId: "1:205665459250:web:60abc9c64f179acd66302b",
   measurementId: "G-7XCWQXJ7BX",
   databaseURL: "https://probspace-5615e-default-rtdb.firebaseio.com/",
-});
+};
 
-const db = getFirestore(firebase);
-const auth = getAuth(firebase);
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
+const auth = getAuth(firebaseApp);
 
 export function useAuth() {
   const user = ref(null);
@@ -48,62 +47,42 @@ export function useAuth() {
     const githubProvider = new GithubAuthProvider();
     await signInWithPopup(auth, githubProvider)
       .then((result) => {
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
         const credential = GithubAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-
-        // The signed-in user info.
         user.value = result.user;
-        // ...
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GithubAuthProvider.credentialFromError(error);
+        console.error(error);
       });
   };
 
   const loginAnonymously = async () => {
     await signInAnonymously(auth)
       .then(() => {
-        // Signed in..
         user.value = auth.currentUser;
       })
       .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ...
+        console.error(error);
       });
   };
 
-  const current = getAuth();
   const logOut = async () => {
-    await signOut(current)
+    await signOut(auth)
       .then(() => {
-        // Sign-out successful.
         user.value = null;
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
   return { user, isLogin, login, logOut, loginAnonymously };
 }
 
-const q = query(
+const messageQuery = query(
   collection(db, "messages"),
-  orderBy("createdAt", "desc"),
-  limit(100)
+  orderBy("createdAt", "asc") // Ascending order
 );
-const messageCollection = computed(async () => {
-  return await getDocs(q);
-});
 
 export function useChat() {
   const messages = ref([]);
@@ -125,17 +104,12 @@ export function useChat() {
     });
   };
 
-  // messageCollection.forEach((doc) => {
-  //     messages.value.push({...doc.data(), id: doc.id});
-  // });
-
-  onSnapshot(q, (querySnapshot) => {
+  onSnapshot(messageQuery, (querySnapshot) => {
     messages.value = querySnapshot.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     }));
-    console.log(messages.value, "iiii");
   });
 
-  return { messages, sendMessage, messageCollection };
+  return { messages, sendMessage };
 }
