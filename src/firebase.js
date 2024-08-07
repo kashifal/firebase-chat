@@ -134,6 +134,7 @@ export function useChat() {
       ...doc.data(),
       id: doc.id,
     }));
+    console.log(messages.value, "iiii");
   });
 
   return { messages, sendMessage, messageCollection };
