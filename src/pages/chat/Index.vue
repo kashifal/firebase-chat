@@ -5,11 +5,10 @@ import { useChat } from "@/firebase.js";
 import Message from "@/pages/chat/Message.vue";
 
 const { messages, sendMessage } = useChat();
+
 const messageList = computed(() => {
-  return messages.value.reverse((message) => {
-    return {
-      ...message,
-    };
+  return messages.value.slice().sort((a, b) => {
+    return new Date(a.createdAt) - new Date(b.createdAt);
   });
 });
 
