@@ -115,6 +115,7 @@ export function useChat() {
       uid,
       photoURL,
       displayName,
+      typing: false,
     });
   };
 

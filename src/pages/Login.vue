@@ -20,14 +20,14 @@ const username = ref("");
       <LogoGithub class="h-4" />
       <span>Sign in with GitHub</span>
     </button> -->
-    <!-- <span>- or -</span>
+    <span>- or -</span>
     <button
       @click="loginAnonymously"
       class="btn py-4 btn-secondary has-icon btn-sm"
     >
       <Skull class="h-4" />
       <span>Enter Chat</span>
-    </button> -->
+    </button>
   </div>
 </template>
 
