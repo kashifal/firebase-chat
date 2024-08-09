@@ -20,7 +20,7 @@ const { isLogin } = useAuth();
       >
         <span class="text-gray-500"
           >Owner
-          <a href="https://kashifsulehria.com/" class="text-blue-500 font-bold"
+          <a href="https://kashifsulehria.com/" class="text-emerald-600 hover:underline font-bold"
             >Kashif Sulehria</a
           ></span
         >

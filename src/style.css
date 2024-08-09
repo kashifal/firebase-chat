@@ -13,7 +13,7 @@
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-blue-500 rounded-2xl hover:bg-blue-600;
+    @apply bg-emerald-500 rounded-2xl hover:bg-emerald-400;
 }
 
 .input-text{

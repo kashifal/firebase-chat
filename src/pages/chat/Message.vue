@@ -41,17 +41,17 @@ function convertTimestamp(timestamp) {
     class="flex w-full mt-2 space-x-3 max-w-sm"
   >
     <div class="flex items-start justify-start gap-2 w-96">
-      <NAvatar :src="message.photoURL" />
+      <NAvatar :src="message.photoURL" class="rounded-full -mt-2"/>
       <div class="flex-1 items-center justify-start gap-2">
         <span class="font-semibold">{{
           message.displayName ?? "Anonymous"
         }}</span>
         <div
-          class="bg-gradient-to-br from-gray-600 to-gray-600 p-2 text-justify text-white rounded-lg rounded-tl-none shadow-lg"
+          class="bg-gray-100 p-2 text-justify text-black rounded-lg rounded-tl-none "
         >
           <span>{{ message.text }}</span>
         </div>
-        <span class="text-gray-400 italic text-xs">
+        <span class="text-gray-500 text-xs font-normal leading-4 py-1 flex justify-end">
           {{ convertTimestamp(message.createdAt) }}
         </span>
       </div>
@@ -60,17 +60,17 @@ function convertTimestamp(timestamp) {
 
   <div v-else class="flex w-full mt-2 space-x-3 max-w-sm ml-auto justify-end">
     <div class="flex flex-row-reverse items-start justify-end gap-2 w-96">
-      <NAvatar :src="message.photoURL" />
+      <NAvatar :src="message.photoURL" class="rounded-full -mt-3" />
       <div class="flex-1 items-center justify-end gap-2 text-right">
         <span class="font-semibold">{{
           message.displayName ?? "Anonymous"
         }}</span>
         <div
-          class="bg-gradient-to-br from-green-600 to-emerald-600 p-2 text-justify text-white rounded-lg rounded-tr-none shadow-lg"
+          class="bg-[#4F46E5] p-2 text-justify text-white rounded-lg rounded-tr-none "
         >
           <span>{{ message.text }}</span>
         </div>
-        <span class="text-gray-400 italic text-xs">
+        <span class="text-gray-500 text-xs font-normal leading-4 py-1 flex justify-start">
           {{ convertTimestamp(message.createdAt) }}
         </span>
       </div>
